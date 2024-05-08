@@ -1,12 +1,12 @@
 import csv
-import sqlite3
+import sqlite3 # Importerer modulene som jeg trenger for å få importert dataen fra csv filen til en database på riktig måte
 
-# Connect to the database (or create it if it doesn't exist)
+# Kobler til databasen, eller lager den hvis den ikke eksisterer
 conn = sqlite3.connect('SQL 2/test2.db')
 cursor = conn.cursor()
 
-# Create a table to store the data
-cursor.execute('''CREATE TABLE IF NOT EXISTS PostInf (
+# Lager tabellen med kolonner til dataen hvis en tabell med samme navn ikke eksisterer
+cursor.execute('''CREATE TABLE IF NOT EXISTS PostInf ( 
     Postnummer varchar(255),
     Poststed TEXT,
     Kommunenummer TEXT,
@@ -14,16 +14,16 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS PostInf (
     Kategori TEXT 
 )''')
 
-# Open the CSV file and read its contents
+# Åpner CSV filen og leser innholdet
 with open('SQL 2/Postnummerregister-Excel.csv', 'r') as f:
     reader = csv.reader(f)
     next(reader)  # Skip the header row
     data = [row for row in reader]
 
-# Insert the data into the table
+# Setter inn dataen i tabellen
     for row in data:
         cursor.execute("INSERT INTO PostInf (Postnummer, Poststed, Kommunenummer, Kommunenavn, Kategori)  VALUES (?, ?, ?, ?, ?)", row)
 
-# Commit the changes and close the connection
+# Fullfører endringene og lukker tilkoblingen
 conn.commit()
 conn.close()
