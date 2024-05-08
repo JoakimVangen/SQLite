@@ -2,7 +2,7 @@ import csv
 import sqlite3
 
 # Connect to the database (or create it if it doesn't exist)
-conn = sqlite3.connect('test2.db')
+conn = sqlite3.connect('SQL 2/test2.db')
 cursor = conn.cursor()
 
 # Create a table to store the data
@@ -15,7 +15,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS PostInf (
 )''')
 
 # Open the CSV file and read its contents
-with open('Postnummerregister-Excel.csv', 'r') as f:
+with open('SQL 2/Postnummerregister-Excel.csv', 'r') as f:
     reader = csv.reader(f)
     next(reader)  # Skip the header row
     data = [row for row in reader]
