@@ -18,7 +18,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS PostInf (
 with open('SQL 2/Postnummerregister-Excel.csv', 'r') as f:
     reader = csv.reader(f)
     next(reader)  # Skip the header row
-    data = [row for row in reader]
+    data = [row for row in reader] # Leser inn dataen fra csv filen
 
 # Setter inn dataen i tabellen
     for row in data:
